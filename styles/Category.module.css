@@ -1,0 +1,8 @@
+.container{
+    border:5px blue solid;
+    margin: 3px;
+}
+.assignments{
+    display:flex;
+    flex-wrap: wrap;
+}
