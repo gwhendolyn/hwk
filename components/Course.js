@@ -9,7 +9,7 @@ export default function Course(props){
     const [editMode, setEditMode] = useState(true);
     const [categories, setCategories] = useState([]);
     const [name, setName] = useState(props.name);
-    const [breakpoints, setBreakpoints] = useState([]);
+    const [breakpoints, setBreakpoints] = useState([]);//TODO: change breakpoints to key:val pairs
     //#endregion
 
     //#region --functions--
@@ -19,6 +19,9 @@ export default function Course(props){
     function editToggle(){
         setEditMode(!editMode);
     }
+    function handleNameChange(event){
+        setName(event.target.value);
+    }
     //#endregion
 
     //#region --main--
@@ -27,8 +30,11 @@ export default function Course(props){
             {editMode ? ( //comp in edit mode
             <div className={styles.container}>
                 <div className={styles.nameIn}>
+                    <p>Class Name:</p>
+                    <input type="text" value={name} onChange={handleNameChange}/>
                 </div>
                 <div className={styles.breakpointsIn}>
+                    {/* map breakpoints to inputs that update vals */}
                 </div>
                 <button onClick={editToggle} className={styles.button}>finish editing</button>
             </div>
