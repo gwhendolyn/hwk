@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Sidebar from '../components/Sidebar';
-import CourseContainer from '../components/CourseContainer';
+import CourseContainer from '../components/courseContainer';
 import React, { useState } from 'react';
 
 export default function Home() {
   const [lightMode, setLightMode] = useState(true);
   const invertLightMode = () =>{
-    console.log("lightmode changed");
     setLightMode(!lightMode);
   }
   return (

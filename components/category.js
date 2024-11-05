@@ -1,6 +1,6 @@
 import styles from  "../styles/Category.module.css"
 import Assignment from "../components/Assignment"
-const assignments =[<Assignment/>,<Assignment/>,<Assignment/>,<Assignment/>];
+const assignments =[];
 export default function Category(props){
     return(
         <div className={styles.container}>

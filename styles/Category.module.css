@@ -1,6 +1,6 @@
 .container{
-    border:5px blue solid;
-    margin: 3px;
+    margin: 5px;
+    border-bottom:2px solid black;
 }
 .assignments{
     display:flex;
