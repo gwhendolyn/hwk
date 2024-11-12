@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Sidebar from '../components/Sidebar';
-import CourseContainer from '../components/courseContainer';
+import Sidebar from '../components/Sidebar.js';
+import CourseContainer from '../components/CourseContainer.js';
 import React, { useState } from 'react';
 
 export default function Home() {
