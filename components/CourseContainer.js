@@ -1,5 +1,5 @@
 import styles from "../styles/CourseContainer.module.css";
-import Course from "../components/course";
+import Course from "../components/Course.js";
 import React, { useState } from "react";
 let nextID =0;
 export default function CourseContainer(props){

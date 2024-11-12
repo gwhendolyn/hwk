@@ -1,5 +1,5 @@
 import styles from "../styles/Course.module.css";
-import Category from "../components/Category";
+import Category from "../components/Category.js";
 import React, { useState } from "react";
 
 let nextCatID = 0;
