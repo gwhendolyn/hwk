@@ -1,5 +1,6 @@
 {
   "private": true,
+  "homepage": "https://gwhendolyn.github.io/hwk",
   "scripts": {
     "predeploy" : "npm run build",
     "deploy" : "gh-pages -d build",
