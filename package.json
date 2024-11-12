@@ -3,7 +3,7 @@
   "homepage": "https://gwhendolyn.github.io/hwk",
   "scripts": {
     "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "deploy" : "gh-pages -d out",
     "build": "next build",
     "dev": "next dev",
     "start": "next start"
