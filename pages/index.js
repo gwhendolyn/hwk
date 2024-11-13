@@ -13,7 +13,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>HWK: Grade Calculator</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/hwk/favicon.ico" />
       </Head>
       <Sidebar lm={lightMode} setLm={invertLightMode}/>
       <CourseContainer lm={lightMode}/>

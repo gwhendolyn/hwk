@@ -1,24 +1,55 @@
 import styles from "../styles/Course.module.css";
 import Category from "../components/Category.js";
-import React, { useState } from "react";
-
-let nextCatID = 0;
-let lockArr = [];
-let lostArr = [];
+import React, { useState,useEffect } from "react";
 
 export default function Course(props){
-    //#region --states--
-    const [editMode, setEditMode] = useState(true);
+    //#region --state variables--
+    const [nextCatID,setNextCatID] = useState((props.catID == null)?0:props.catID);
+    const [lockArr,setLockArr] = useState([]);
+    const [lostArr,setLostArr] = useState([]);
+    const [editMode, setEditMode] = useState((props.em == null)? true:props.em);
     const [categories, setCategories] = useState([]);
-    const [name, setName] = useState("New class");
-    const [breakpoints, setBreakpoints] = useState([["D",60],["C",70],["B",80],["A",90]]);
-    const [pointsLocked, setPointsLocked] = useState(0);
-    const [pointsLost, setPointsLost] = useState(0);
+    const [name, setName] = useState((props.nam == null)? "New class":props.nam);
+    const [breakpoints, setBreakpoints] = useState((props.bp == null)?[["D",60],["C",70],["B",80],["A",90]]:props.bp);
+    const [pointsLocked, setPointsLocked] = useState((props.pLock == null)? 0:props.pLock);
+    const [pointsLost, setPointsLost] = useState((props.pLost == null)? 0:props.pLost);
+    useEffect(()=>{
+        if(props.cats != null && props.cats.length > 0){
+            var catsTemp = []
+            for(const cat of Object.keys(props.cats)){
+                catsTemp.push(<Category
+                key={parseInt(cat)}
+                id={parseInt(cat)}
+                classID={props.id}
+                updateCat={props.updateCat}
+                updateLocked={updateLocked}
+                updateLost={updateLost}
+                nam={props.cats[cat]["nam"]}
+                wght={props.cats[cat]["wght"]}
+                ass={props.cats[cat]["ass"]}
+                em={false}
+                />);
+            }
+            setCategories(catsTemp);
+            setNextCatID(props.cats.length);
+        }
+    }, []);
+    useEffect(()=>{
+        props.updateClass(props.id,"nam",name);
+        props.updateClass(props.id,"bp",breakpoints);
+        props.updateClass(props.id,"pLock",pointsLocked);
+        props.updateClass(props.id,"pLost",pointsLost);
+    }, [name,breakpoints,pointsLocked,pointsLost]);
     //#endregion
 
     //#region --functions--
     function addCategory(){
-        setCategories([...categories,<Category key={nextCatID++} id={nextCatID} updateLocked={updateLocked} updateLost={updateLost}/>])
+        setCategories([...categories,<Category key={nextCatID} id={nextCatID} classID={props.id} updateCat={props.updateCat} updateLocked={updateLocked} updateLost={updateLost}/>])
+        props.addCat(props.id,nextCatID);
+        setNextCatID(nextCatID+1);
+    }
+    const removeCategory = (key) =>{
+        //TODO: implement deletion
     }
     function editToggle(){
         if (editMode){
@@ -47,11 +78,15 @@ export default function Course(props){
         return l;
     }
     const updateLocked = (val,index) =>{
-        lockArr[index] = val;
+        var temp = lockArr;
+        temp[index] = val;
+        setLockArr(temp);
         setPointsLocked(lockArr.reduce((acc, cur) => {return acc+cur},0))
     }
     const updateLost = (val,index) =>{
-        lostArr[index] = val;
+        var temp = lostArr;
+        temp[index] = val;
+        setLostArr(temp);
         setPointsLost(lostArr.reduce((acc, cur) => {return acc+cur},0));
     }
     //#endregion

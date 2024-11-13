@@ -2,11 +2,15 @@ import styles from  "../styles/Category.module.css"
 import React, { useState, useEffect } from "react";
 
 export default function Category(props){
-    const [name, setName] = useState("New Category");
-    const [weight, setWeight] = useState(0);
-    const [assignments, setAssignments] = useState([]);
-    const [editMode, setEditMode] = useState(true);
-    
+    const [name, setName] = useState((props.nam == null)?"New Category":props.nam);
+    const [weight, setWeight] = useState((props.wght == null)?0:props.wght);
+    const [assignments, setAssignments] = useState((props.ass == null)?[]:props.ass);
+    const [editMode, setEditMode] = useState((props.em == null)?true:props.em);
+    useEffect(()=>{
+        props.updateCat(props.classID,props.id,"nam",name);
+        props.updateCat(props.classID,props.id,"wght",weight);
+        props.updateCat(props.classID,props.id,"ass",assignments);
+    }, [name,weight,assignments]);
     useEffect(()=>{
         var newLocked = 0;
         var newLost = 0;
