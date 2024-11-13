@@ -14,10 +14,9 @@ export default function Course(props){
     const [pointsLocked, setPointsLocked] = useState((props.pLock == null)? 0:props.pLock);
     const [pointsLost, setPointsLost] = useState((props.pLost == null)? 0:props.pLost);
     useEffect(()=>{
-        if(props.cats != null && props.cats.length > 0){
-            var catsTemp = []
+        if(props.cats != null){
             for(const cat of Object.keys(props.cats)){
-                catsTemp.push(<Category
+                setCategories([...categories,<Category
                 key={parseInt(cat)}
                 id={parseInt(cat)}
                 classID={props.id}
@@ -28,10 +27,10 @@ export default function Course(props){
                 wght={props.cats[cat]["wght"]}
                 ass={props.cats[cat]["ass"]}
                 em={false}
-                />);
+                />]);
+                props.addCat(props.id,nextCatID);
+                setNextCatID(nextCatID+1);
             }
-            setCategories(catsTemp);
-            setNextCatID(props.cats.length);
         }
     }, []);
     useEffect(()=>{

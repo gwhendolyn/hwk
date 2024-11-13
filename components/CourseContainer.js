@@ -6,23 +6,21 @@ let nextID =0;
 export default function CourseContainer(props){
     const [courses, setCourses] = useState([]);
     const [simplifiedState, setSimplifiedState] = useState({});
-    //useEffect(()=>{
-    //    const storedState = JSON.parse(localStorage.getItem("simplifiedState"));
-    //    if (storedState){
-    //        console.log(storedState);
-    //        fromSave(storedState);
-    //        setSimplifiedState(storedState);
-    //    }
-    //}, []);
+    useEffect(()=>{
+        const storedState = JSON.parse(localStorage.getItem("simplifiedState"));
+        if (storedState){
+            fromSave(storedState);
+        }
+    }, []);
 
     useEffect(()=>{
         localStorage.setItem("simplifiedState", JSON.stringify(simplifiedState));
     }, [JSON.stringify(simplifiedState)]);
     
     function fromSave(objState){
-        var coursesTemp = [];
         for(const cou of Object.keys(objState)){
-            coursesTemp.push(<Course
+            console.log(objState[cou]["cats"]);
+            setCourses([...courses,<Course
             key={parseInt(cou)}
             id={parseInt(cou)}
             updateClass={updateClass}
@@ -33,11 +31,12 @@ export default function CourseContainer(props){
             nam={objState[cou]["nam"]}
             bp={objState[cou]["bp"]}
             pLock={objState[cou]["pLock"]}
-            pLost={objState[cou]["pLost"]}/>)
+            pLost={objState[cou]["pLost"]}/>])
+            var temp = simplifiedState;
+            temp[cou] = {"cats":{}};
+            setSimplifiedState(structuredClone(temp));
+            nextID++;
         }
-        console.log(coursesTemp);
-        setCourses([...coursesTemp]);
-        nextID = coursesTemp.length;
     }
     const updateClass = (id,valName,newVal) =>{
         var temp = simplifiedState;
@@ -57,7 +56,6 @@ export default function CourseContainer(props){
     }
     function addCourse() {
         setCourses([...courses,<Course key={nextID} id={nextID} updateClass={updateClass} addCat={addCat} updateCat={updateCat}/>]);
-        console.log(courses);
         var temp = simplifiedState;
         temp[nextID] = {'cats':{}};
         setSimplifiedState(structuredClone(temp));
