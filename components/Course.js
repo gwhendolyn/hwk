@@ -2,6 +2,7 @@ import styles from "../styles/Course.module.css";
 import Category from "../components/Category.js";
 import React, { useState,useEffect } from "react";
 
+
 export default function Course(props){
     //#region --state variables--
     const [nextCatID,setNextCatID] = useState((props.catID == null)?0:props.catID);
@@ -15,8 +16,9 @@ export default function Course(props){
     const [pointsLost, setPointsLost] = useState((props.pLost == null)? 0:props.pLost);
     useEffect(()=>{
         if(props.cats != null){
+            var catsTmp =[];
             for(const cat of Object.keys(props.cats)){
-                setCategories([...categories,<Category
+                catsTmp = [...catsTmp,<Category
                 key={parseInt(cat)}
                 id={parseInt(cat)}
                 classID={props.id}
@@ -27,10 +29,11 @@ export default function Course(props){
                 wght={props.cats[cat]["wght"]}
                 ass={props.cats[cat]["ass"]}
                 em={false}
-                />]);
-                props.addCat(props.id,nextCatID);
-                setNextCatID(nextCatID+1);
+                />];
+                props.addCat(props.id,cat);
             }
+            setNextCatID(catsTmp.length);
+            setCategories(categories.concat(catsTmp));
         }
     }, []);
     useEffect(()=>{

@@ -1,8 +1,8 @@
 import styles from "../styles/CourseContainer.module.css";
 import Course from "./Course.js";
-import Category from "./Category.js";
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, } from "react";
 let nextID =0;
+
 export default function CourseContainer(props){
     const [courses, setCourses] = useState([]);
     const [simplifiedState, setSimplifiedState] = useState({});
@@ -18,25 +18,26 @@ export default function CourseContainer(props){
     }, [JSON.stringify(simplifiedState)]);
     
     function fromSave(objState){
+        var coursesTmp = [];
         for(const cou of Object.keys(objState)){
-            console.log(objState[cou]["cats"]);
-            setCourses([...courses,<Course
+            coursesTmp = [...coursesTmp,<Course
             key={parseInt(cou)}
             id={parseInt(cou)}
             updateClass={updateClass}
             updateCat={updateCat}
             addCat={addCat}
-            cats={objState[cou]["cats"]}
+            cats={structuredClone(objState[cou]["cats"])}
             em={false}
             nam={objState[cou]["nam"]}
             bp={objState[cou]["bp"]}
             pLock={objState[cou]["pLock"]}
-            pLost={objState[cou]["pLost"]}/>])
+            pLost={objState[cou]["pLost"]}/>];
             var temp = simplifiedState;
-            temp[cou] = {"cats":{}};
+            temp[cou] = objState[cou];
             setSimplifiedState(structuredClone(temp));
-            nextID++;
         }
+        nextID = coursesTmp.length;
+        setCourses(courses.concat(coursesTmp));
     }
     const updateClass = (id,valName,newVal) =>{
         var temp = simplifiedState;
