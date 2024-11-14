@@ -63,8 +63,11 @@ export default function CourseContainer(props){
         setSimplifiedState(structuredClone(temp));
         nextID++;
     }
-    const deleteCourse = (k) => () =>{
-        setCourses(courses.filter((cour)=>{return cour.key !== k}));
+    const deleteCourse = (k) =>{
+        setCourses((prevCourses) => {return prevCourses.filter((cour) => parseInt(cour.key) !== k);});
+        var temp = simplifiedState;
+        delete temp[k];
+        setSimplifiedState(structuredClone(temp));
     }
     return(
         <div className={styles.container} id={props.lm ? null:"inverted"}>
