@@ -15,7 +15,7 @@ export default function Course(props){
     const [pointsLocked, setPointsLocked] = useState((props.pLock == null)? 0:props.pLock);
     const [pointsLost, setPointsLost] = useState((props.pLost == null)? 0:props.pLost);
     useEffect(()=>{
-        if(props.cats != null){
+        if(props.cats != null && categories.length == 0){
             var catsTmp =[];
             for(const cat of Object.keys(props.cats)){
                 catsTmp = [...catsTmp,<Category
@@ -96,8 +96,7 @@ export default function Course(props){
     //#region --main--
     return(
         <div>
-            {editMode ? ( //comp in edit mode
-            <div className={styles.container}>
+            <div className={styles.container} style={{display: editMode ? null : 'none'}}>
                 <div className={styles.nameIn}>
                     <p>Class Name:</p>
                     <input type="text" value={name} onChange={handleNameChange} onFocus={(e) => {e.target.select()}}/>
@@ -116,8 +115,7 @@ export default function Course(props){
                 </div>
                 <button onClick={editToggle} className={styles.button}>finish editing</button>
             </div>
-            ) : ( //comp not in edit mode
-            <div className={styles.container}>
+            <div className={styles.container} style={{display: editMode ? 'none' : null }}>
                 {/* info bar and edit button */}
                 <div className={styles.topBar}>
                     <h1>{name}</h1>
@@ -134,7 +132,6 @@ export default function Course(props){
                 </div>
                 
             </div>
-            )}
         </div>
     );
     //#endregion
