@@ -124,6 +124,7 @@ export default function Course(props){
                     <h2>Currently achieved grade: {pointsLocked.toFixed(2)}% ({letter(pointsLocked)})</h2>
                     <h2>Highest possible grade: {(100-pointsLost).toFixed(2)}% ({letter(100-pointsLost)})</h2>
                     <button onClick={editToggle} className={styles.button}>edit</button>
+                    <button onClick={() => props.deleteCourse(props.id)} className={styles.button}>X</button>
                 </div>
 
                 {/* categories and add category button */}

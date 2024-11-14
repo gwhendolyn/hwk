@@ -26,6 +26,7 @@ export default function CourseContainer(props){
             updateClass={updateClass}
             updateCat={updateCat}
             addCat={addCat}
+            deleteCourse={deleteCourse}
             cats={structuredClone(objState[cou]["cats"])}
             em={false}
             nam={objState[cou]["nam"]}
@@ -56,14 +57,14 @@ export default function CourseContainer(props){
         setSimplifiedState(structuredClone(temp));
     }
     function addCourse() {
-        setCourses([...courses,<Course key={nextID} id={nextID} updateClass={updateClass} addCat={addCat} updateCat={updateCat}/>]);
+        setCourses([...courses,<Course key={nextID} id={nextID} updateClass={updateClass} addCat={addCat} updateCat={updateCat} deleteCourse={deleteCourse}/>]);
         var temp = simplifiedState;
         temp[nextID] = {'cats':{}};
         setSimplifiedState(structuredClone(temp));
         nextID++;
     }
-    const deleteCourse = (key) =>{
-        //TODO: implement delete
+    const deleteCourse = (k) =>{
+        setCourses(courses.filter((cour)=>{return cour.key !== k}));
     }
     return(
         <div className={styles.container} id={props.lm ? null:"inverted"}>
