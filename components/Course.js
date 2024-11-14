@@ -50,7 +50,7 @@ export default function Course(props){
         props.addCat(props.id,nextCatID);
         setNextCatID(nextCatID+1);
     }
-    const removeCategory = (key) =>{
+    const removeCategory = (key) => () =>{
         //TODO: implement deletion
     }
     function editToggle(){

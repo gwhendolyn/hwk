@@ -63,7 +63,7 @@ export default function CourseContainer(props){
         setSimplifiedState(structuredClone(temp));
         nextID++;
     }
-    const deleteCourse = (k) =>{
+    const deleteCourse = (k) => () =>{
         setCourses(courses.filter((cour)=>{return cour.key !== k}));
     }
     return(
