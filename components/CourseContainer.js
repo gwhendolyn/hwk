@@ -4,8 +4,15 @@ import React, { useState,useEffect, } from "react";
 let nextID =0;
 
 export default function CourseContainer(props){
+    //#region --state and effect hooks--
+
+    //tracks the current array of courses
     const [courses, setCourses] = useState([]);
+
+    //tracks the current state of all children to be used for saving/loading
     const [simplifiedState, setSimplifiedState] = useState({});
+    
+    //on mount, loads state from localStorage if a valid state is stored there
     useEffect(()=>{
         var storedState;
         try {
@@ -18,10 +25,15 @@ export default function CourseContainer(props){
         }
     }, []);
 
+    //updates localStorage when simplifiedState is updated
     useEffect(()=>{
         localStorage.setItem("simplifiedState", JSON.stringify(simplifiedState));
     }, [JSON.stringify(simplifiedState)]);
-    
+    //#endregion
+
+    //#region --functions--
+
+    //passes the values from the state to be loaded into children props
     function fromSave(objState){
         var coursesTmp = [];
         for(const cou of Object.keys(objState)){
@@ -45,22 +57,29 @@ export default function CourseContainer(props){
         nextID = coursesTmp.length;
         setCourses(courses.concat(coursesTmp));
     }
+
+    //updates the state of a single class in simplifiedState
     const updateClass = (id,valName,newVal) =>{
         var temp = simplifiedState;
         temp[id][valName] = newVal;
         setSimplifiedState(structuredClone(temp));
     }
+
+    //adds a category to a class in simplifiedState
     const addCat = (classID,catID) =>{
         var temp = simplifiedState;
         temp[classID]["cats"][catID] = {};
         setSimplifiedState(structuredClone(temp));
     }
 
+    //updates the state of a single category in simplifiedState
     const updateCat = (classID,catID,valName,newVal) =>{
         var temp = simplifiedState;
         temp[classID]["cats"][catID][valName] = newVal;
         setSimplifiedState(structuredClone(temp));
     }
+
+    //adds a course object to simplifiedState
     function addCourse() {
         setCourses([...courses,<Course key={nextID} id={nextID} updateClass={updateClass} addCat={addCat} updateCat={updateCat} deleteCourse={deleteCourse}/>]);
         var temp = simplifiedState;
@@ -68,12 +87,17 @@ export default function CourseContainer(props){
         setSimplifiedState(structuredClone(temp));
         nextID++;
     }
+
+    //removes a course childe from courses state as well as from simplifiedState
     const deleteCourse = (k) =>{
         setCourses((prevCourses) => {return prevCourses.filter((cour) => parseInt(cour.key) !== k);});
         var temp = simplifiedState;
         delete temp[k];
         setSimplifiedState(structuredClone(temp));
     }
+    //#endregion
+
+    //#region --main render--
     return(
         <div className={styles.container} id={props.lm ? null:"inverted"}>
             {courses}
@@ -82,4 +106,5 @@ export default function CourseContainer(props){
             </button>
         </div>
     );
+    //#endregion
 }

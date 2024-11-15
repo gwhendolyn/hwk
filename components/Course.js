@@ -4,17 +4,39 @@ import React, { useState,useEffect } from "react";
 
 
 export default function Course(props){
-    //#region --state variables--
+    //#region --state and effect hooks--
+    
+    //tracks the currently avaiable ID for a new category
     const [nextCatID,setNextCatID] = useState((props.catID == null)?0:props.catID);
+    
+    //tracks 'locked points' from each category
     const [lockArr,setLockArr] = useState([]);
+
+    //tracks 'lost points' from each category
     const [lostArr,setLostArr] = useState([]);
+
+    //tracks the currently displayed version of the course object, true=editing false=information
     const [editMode, setEditMode] = useState((props.em == null)? true:props.em);
+
+    //tracks the category child components of this course
     const [categories, setCategories] = useState([]);
+
+    //tracks the courses name
     const [name, setName] = useState((props.nam == null)? "New class":props.nam);
+
+    //tracks the courses grading breakpoints used to convert percentage grade to letter
     const [breakpoints, setBreakpoints] = useState((props.bp == null)?[["D",60],["C",70],["B",80],["A",90]]:props.bp);
+    
+    //aggregates 'locked points' from lockArr
     const [pointsLocked, setPointsLocked] = useState((props.pLock == null)? 0:props.pLock);
+    
+    //aggregates 'lost points from lostArr
     const [pointsLost, setPointsLost] = useState((props.pLost == null)? 0:props.pLost);
+    
+    //tracks the visibility of this courses child category components
     const [showCats, setShowCats] = useState(true);
+    
+    //on mount, loads categories from props.cats if said prop was passed
     useEffect(()=>{
         if(props.cats != null && categories.length == 0){
             var catsTmp =[];
@@ -37,6 +59,9 @@ export default function Course(props){
             setCategories(categories.concat(catsTmp));
         }
     }, []);
+
+    //on mount, and on change of: name, breakpoints, pointsLocked, pointsLost
+    //updates the simplifiedState object in the parent courseContainer component
     useEffect(()=>{
         props.updateClass(props.id,"nam",name);
         props.updateClass(props.id,"bp",breakpoints);
@@ -46,14 +71,21 @@ export default function Course(props){
     //#endregion
 
     //#region --functions--
+
+    //adds a new category child component to categories state variable
+    //as well as simplifiedState in the parent courseContainer component
     function addCategory(){
         setCategories([...categories,<Category key={nextCatID} id={nextCatID} classID={props.id} updateCat={props.updateCat} updateLocked={updateLocked} updateLost={updateLost}/>])
         props.addCat(props.id,nextCatID);
         setNextCatID(nextCatID+1);
     }
+
+    //removes a category from the relevant places
     const removeCategory = (key) => () =>{
         //TODO: implement deletion
     }
+
+    //toggles the editMode state variable, sorts breakpoints on exiting edit mode
     function editToggle(){
         if (editMode){
             setBreakpoints([...breakpoints].sort(function(x,y){return (x[1]-y[1])}));
@@ -100,7 +132,7 @@ export default function Course(props){
     }
     //#endregion
 
-    //#region --main--
+    //#region --main render--
     return(
         <div>
             <div className={styles.containerWhite} style={{display: editMode ? null : 'none'}}>

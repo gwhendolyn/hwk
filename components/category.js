@@ -2,6 +2,8 @@ import styles from  "../styles/Category.module.css"
 import React, { useState, useEffect } from "react";
 
 export default function Category(props){
+    
+    //#region --state and effect hooks--
     const [name, setName] = useState((props.nam == null)?"New Category":props.nam);
     const [weight, setWeight] = useState((props.wght == null)?0:props.wght);
     const [assignments, setAssignments] = useState((props.ass == null)?[]:props.ass);
@@ -32,7 +34,9 @@ export default function Category(props){
         props.updateLost(newLost,props.id);
 
     }, [assignments]);
+    //#endregion
 
+    //#region --functions--
     function editToggle(){
         setEditMode(!editMode);
     }
@@ -51,6 +55,9 @@ export default function Category(props){
     const changeAssGrade = (index) => (event) =>{
         setAssignments(assignments.map((a,i) => {return (i == index)? [a[0],event.target.value]:a}));
     }
+    //#endregion
+
+    //#region --main render--
     return(
         <div>
             {editMode ? (
@@ -81,4 +88,5 @@ export default function Category(props){
             )}
         </div>
     );
+    //#endregion
 }

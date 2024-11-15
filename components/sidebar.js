@@ -1,6 +1,6 @@
 import styles from "../styles/Sidebar.module.css"
 export default function Sidebar(props){
-    
+    //#region --main render--
     return(
         <div className={styles.container} id={props.lm ? null:"inverted"}>
             <button className={styles.button} onClick={props.toggleSave}>
@@ -28,4 +28,5 @@ export default function Sidebar(props){
             <hr className={styles.rule}/>
         </div>
     );
+    //#endregion
 }

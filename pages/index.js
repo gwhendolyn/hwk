@@ -4,36 +4,68 @@ import Sidebar from '../components/Sidebar.js';
 import CourseContainer from '../components/CourseContainer.js';
 import React, { useState } from 'react';
 export default function Home() {
+  //#region --state and effect hooks--
+  
+  //tracks the current theme of the UI, true=light false=dark
   const [lightMode, setLightMode] = useState(true);
+
+  //tracks the visibility of the loading card, true=visible false=not
   const [load, setLoad] = useState(false);
+
+  //tracks the visibility of the saving card, true=visible false=not
   const [save, setSave] = useState(false);
+
+  //tracks the visibility of the info card, true=visible false=not
   const [info, setInfo] = useState(false);
+
+  //used as a key for the courseContainer component, incremented to force a remount
   const [CCID, setCCID] = useState(0);
+
+  //tracks the current string available in the save card textarea
   const [saveStr, setSaveStr] = useState("");
+
+  //tracks the string input by the user in the load card textarea
   const [loadStr, setLoadStr] = useState("");
+  //#endregion
+
+  //#region --functions--
+
+  //inverts current theme
   const invertLightMode = () =>{
     setLightMode(!lightMode);
   }
+
+  //shows/hides loading card
   const toggleLoad = () =>{
     setLoad(!load);
   }
+
+  //shows/hides saving card
   const toggleSave = () =>{
     setSaveStr(localStorage.getItem("simplifiedState"));
     setSave(!save);
   }
+
+  //shows/hides info card
   const toggleInfo = () =>{
     setInfo(!info);
   }
+
+  //updates loadStr to what is currently in the loading card textarea
   function handleLoadChange(event){
     setLoadStr(event.target.value);
   }
+
+  //sends current loadStr to localStorage and forces a remount of the courseContainer
+  //to cause it to load from loaclStorage
   const loadFromString = () =>{
     localStorage.setItem("simplifiedState",loadStr);
     setCCID(CCID+1);
     toggleLoad();
   }
-
+  //#endregion
   
+  //#region --main render--
   return (
     <div className={styles.container}>
       {/* --loading card-- */}
@@ -80,4 +112,5 @@ export default function Home() {
       <CourseContainer key={CCID} lm={lightMode}/>
     </div>
   );
+  //#endregion
 }
