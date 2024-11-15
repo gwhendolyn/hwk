@@ -20,8 +20,20 @@ img {
   max-width: 100%;
   height: auto;
 }
+input{
+  border:1px;
+  border-radius: 3px;
+  padding:3px 5px;
+  box-shadow: rgba(0,0,0,0.45) 0px 0px 2px inset;
+}
 
 #inverted{
   filter:invert(1);
   box-shadow: rgba(255, 255, 255, 0.3) 0px 19px 38px, rgba(255, 255, 255, 0.22) 0px 15px 12px;
+}
+#scary{
+  background-color: #ffa4a4;
+}
+#good{
+  background-color: #c5ffc5;
 }

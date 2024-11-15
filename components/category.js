@@ -59,12 +59,12 @@ export default function Category(props){
                 <input type="text" value={name} onChange={changeName} onFocus={(e) => {e.target.select()}}/> 
                 <p>Weight</p> 
                 <input type="number" value={weight} onChange={changeWeight} onFocus={(e) => {e.target.select()}}/> 
-                <button onClick={editToggle}>finish editing</button>
+                <button onClick={editToggle} className={styles.button}>finish editing</button>
             </div>
             ):(
             <div className={styles.container}>
                 <p>{name}</p>
-                <button onClick={editToggle}>edit</button>
+                <button className={styles.button} onClick={editToggle}>edit</button>
                 <div className={styles.assignments}>
                     {(assignments.length > 0) ? (
                         assignments.map((a, i) => {

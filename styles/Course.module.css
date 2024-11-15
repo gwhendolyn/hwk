@@ -1,14 +1,14 @@
 .container{
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     margin: 10px;
     padding: 5px;
     transition-duration: 0.2s;
 }
 .topBar{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: white;
     display:flex;
     margin-bottom:5px;
-    border-bottom: 2px solid black;
+    position:relative;
 }
 .topBar h1{
     font-size: 16pt;
@@ -18,4 +18,123 @@
     margin: 10px;
     font-size: 16pt;
     font-weight: 200;
+}
+.topBar .spacer{
+    margin: auto;
+}
+
+.button{
+    align-content: center;
+    margin:5px;
+    transition-duration: .1s;
+    display: block;
+    background-color: white;
+    width:40px;
+    min-height: 40px;
+    border:1px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.button:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.button:active{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.labels{
+    display: flex;
+}
+.minimize{
+    display:block;
+    position:absolute;
+    width: 80px;
+    height: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 85%;
+    border:0px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: white;
+}
+.minimize:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.minimize:active{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.minimize .icon{
+    margin-top:-4px;
+}
+.categoriesBox{
+    overflow:hidden;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.icon{
+    height: auto;
+    margin: auto;
+}
+.containerWhite{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: white;
+    margin: 10px;
+    padding: 5px;
+    transition-duration: 0.2s;
+    display:flex;
+    flex-direction: column;
+}
+.nameIn{
+    display:flex;
+    height: fit-content;
+
+}
+.nameIn input{
+    margin:auto 10px;
+}
+.breakpointsIn{
+    display: flex;
+    flex-direction: column;
+}
+.bpCards{
+    display: flex;
+    flex-wrap: wrap;
+}
+.bpCards button{
+    height:fit-content;
+    margin: auto 5px;
+}
+.bpCard{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    position: relative;
+    margin:5px;
+    padding:10px;
+} 
+.deleteButton{
+    position:absolute;
+    min-width:20px;
+    min-height:20px;
+    right: 2px;
+    top: 5px;
+    align-content: center;
+    margin:5px;
+    transition-duration: .1s;
+    display: block;
+    background-color: white;
+    border:1px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.deleteButton .icon{
+    height:12px;
+    margin:0px;
+}
+.deleteButton:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.deleteButton:active{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.bpCard p{
+    margin: 5px;
+}
+.label{
+    margin-left:10px;
 }

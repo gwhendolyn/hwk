@@ -7,7 +7,12 @@ export default function CourseContainer(props){
     const [courses, setCourses] = useState([]);
     const [simplifiedState, setSimplifiedState] = useState({});
     useEffect(()=>{
-        const storedState = JSON.parse(localStorage.getItem("simplifiedState"));
+        var storedState;
+        try {
+            storedState = JSON.parse(localStorage.getItem("simplifiedState"));
+        } catch (error) {
+            storedState = {};
+        }
         if (storedState){
             fromSave(storedState);
         }

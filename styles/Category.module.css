@@ -1,8 +1,30 @@
 .container{
+    background-color: white;
     margin: 5px;
-    border-bottom:2px solid black;
+    padding:5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.container p{
+    margin:5px;
 }
 .assignments{
     display:flex;
     flex-wrap: wrap;
+}
+.button{
+    align-content: center;
+    margin:5px;
+    transition-duration: .1s;
+    display: block;
+    background-color: white;
+    width:40px;
+    min-height: 40px;
+    border:1px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.button:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.button:active{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
