@@ -37,8 +37,8 @@ export default function Home() {
   return (
     <div className={styles.container}>
       {/* --loading card-- */}
-      {load? (<div className={styles.cardbg} id={lightMode ? null:"inverted"}>
-        <div className={styles.card}>
+      {load? (<div className={styles.cardbg}>
+        <div className={styles.card} id={lightMode ? null:"inverted"}>
           <button className={styles.deleteButton} id="scary" onClick={toggleLoad}><img className={styles.icon} src="/hwk/close.svg"/></button>
           <h2>paste that string from earlier</h2>
           <div className={styles.customRule}/>
