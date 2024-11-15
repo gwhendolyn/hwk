@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       {/* --loading card-- */}
-      {load? (<div className={styles.cardbg}>
+      {load? (<div className={styles.cardbg} id={lightMode ? null:"inverted"}>
         <div className={styles.card}>
           <button className={styles.deleteButton} id="scary" onClick={toggleLoad}><img className={styles.icon} src="/hwk/close.svg"/></button>
           <h2>paste that string from earlier</h2>
@@ -49,7 +49,7 @@ export default function Home() {
       
       {/* --saving card-- */}
       {save? (<div className={styles.cardbg}>
-        <div className={styles.card}>
+        <div className={styles.card} id={lightMode ? null:"inverted"}>
           <button className={styles.deleteButton} id="scary" onClick={toggleSave}><img className={styles.icon} src="/hwk/close.svg"/></button>
           <h2>copy this string and keep it safe</h2>
           <div className={styles.customRule}/>
@@ -59,7 +59,7 @@ export default function Home() {
       
       {/* --info card-- */}
       {info? (<div className={styles.cardbg}>
-        <div className={styles.card}>
+        <div className={styles.card} id={lightMode ? null:"inverted"}>
           <button className={styles.deleteButton} id="scary" onClick={toggleInfo}><img className={styles.icon} src="/hwk/close.svg"/></button>
           <h2>HWK: grade calculator</h2>
           <div className={styles.customRule}/>
