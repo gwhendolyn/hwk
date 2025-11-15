@@ -1,1 +1,3 @@
-Grade calculator for software engineering class
+Grade calculator for software engineering class.
+
+accessible at gwhendolyn.github.io/hwk
